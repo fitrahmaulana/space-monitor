@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Video Prediction{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<section id="videoPrediction" class="videoPrediction section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Video</h2>
+      <h3>Find out about <span>Video Prediction</span></h3>
+      <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4" data-aos="fade-right" data-aos-delay="100">
+          <form action="/upload" method="post" enctype="multipart/form-data">
+          <div class="card text-dark bg-light mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Upload Video</h5>
+                <p class="card-text">Gunakan video yang relevan dari model yang telah dilatih.</p>
+                <input class="form-control" type="file" id="formFile" name="file" accept="video/*">
+                <button type="submit" class="btn btn-primary mt-3 float-end">Submit</button>
+              </div>
+          </form>
+          </div>
+      </div>
+      <div class="col-lg-8 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <!-- <img src="{{url_for('static', filename='assets/img/about.jpg')}}" class="img-fluid" alt=""> -->
+          <img src="{{ url_for('video_feed', video_path=video_path) }}" alt="Video Feed">
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
