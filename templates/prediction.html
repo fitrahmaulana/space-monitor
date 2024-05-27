@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <h1>Parking Management System</h1>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+    <div class="image-container">
+        <h2>Original Image</h2>
+        <img src="{{ url_for('static', filename=image_path) }}" alt="Uploaded Image">
+    </div>
+    <div class="image-container">
+        <h2>Prediction Result</h2>
+        <img src="{{ url_for('static', filename=prediction_path) }}" alt="Prediction Result">
+    </div>
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
