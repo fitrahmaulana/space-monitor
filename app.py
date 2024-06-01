@@ -1,7 +1,7 @@
-# Import necessary libraries
-from flask import Flask, render_template, Response, request, redirect, url_for, flash
+from flask import Flask, render_template, Response, request, jsonify
 import cv2
 import os
+import json
 from parking_management import ParkingManagement
 from werkzeug.utils import secure_filename
 import logging
@@ -64,13 +64,11 @@ def index():
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
-        flash('No file part')
-        return redirect("/")
+        return jsonify({'error': 'No file part'}), 400
     
     file = request.files['file']
     if file.filename == '':
-        flash('No selected file')
-        return redirect("/")
+        return jsonify({'error': 'No selected file'}), 400
     
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
@@ -80,8 +78,7 @@ def predict():
         if filename.split('.')[-1].lower() in {'mp4', 'avi', 'mov'}:
             # Video prediction
             logging.info(f"Video file uploaded: {file_path}")
-            flash('Video file successfully uploaded')
-            return redirect(url_for('video_prediction', video_path=file_path))
+            return jsonify({'message': 'Video file successfully uploaded', 'video_path': file_path})
         else:
             # Image prediction
             management = ParkingManagement(model_path=app.config['MODEL_PATH'])
@@ -102,21 +99,25 @@ def predict():
             prediction_url = os.path.join('uploads', prediction_filename).replace('\\', '/')
             
             logging.info(f"Image processed and saved: {prediction_path}")
-            flash('Image successfully processed')
-            return render_template('prediction.html', image_path=image_url, prediction_path=prediction_url)
+            return jsonify({'message': 'Image successfully processed', 'image_path': image_url, 'prediction_path': prediction_url})
     
-    flash('File type not allowed')
-    return redirect("/")
+    return jsonify({'error': 'File type not allowed'}), 400
+
+@app.route('/save_boxes', methods=['POST'])
+def save_boxes():
+    boxes = request.json
+    try:
+        with open(app.config['POLYGON_JSON_PATH'], 'w') as f:
+            json.dump(boxes, f)
+        return jsonify({'success': True})
+    except Exception as e:
+        logging.error(f"Error saving bounding boxes: {e}")
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/video_feed')
 def video_feed():
     video_path = request.args.get('video_path')
     return Response(gen_frames(video_path), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/video_prediction')
-def video_prediction():
-    video_path = request.args.get('video_path')
-    return render_template('videoPrediction.html', video_path=video_path)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -4,7 +4,7 @@
 	
 <!-- Mirrored from www.okler.net/previews/porto/10.2.0/demo-digital-agency-2-dark.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 May 2024 14:22:42 GMT -->
 <head>
-		
+	{% block head %}
 		<!-- Basic -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,23 +34,33 @@
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/theme-blog.css')}}">
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/theme-shop.css')}}">
 
-		<!-- Demo CSS -->		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/demos/demo-digital-agency-2-dark.css')}}">
+		<!-- Demo CSS -->		
+		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/demos/demo-digital-agency-2-dark.css')}}">
 
-		<!-- Skin CSS -->		<link id="skinCSS" rel="stylesheet" href="{{url_for('static', filename='assets/css/skins/skin-digital-agency-2.css')}}">
+		<!-- Skin CSS -->		
+		<link id="skinCSS" rel="stylesheet" href="{{url_for('static', filename='assets/css/skins/skin-digital-agency-2.css')}}">
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/custom.css')}}">
-
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-42715764-11"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'UA-42715764-11');
-		</script>
-
+		
+		<!-- style  -->
+		<style>
+			#canvas-container {
+				position: relative;
+				width: 80%;
+				margin: auto;
+			}
+			canvas {
+				border: 1px solid black;
+			}
+			
+			#bounding-box {
+				border: 2px solid blue;
+				position: absolute;
+				pointer-events: none;
+			}
+		</style>
+		{% endblock %}
 	</head>	
 	<body class="dark" data-plugin-scroll-spy data-plugin-options="{'target': '#header'}">
 
@@ -131,7 +141,7 @@
 		
 				<!-- services -->
 				{% include "components/services.html" %}
-				
+
                 <!-- team -->         
                 {% include "components/team.html" %}
 
@@ -140,7 +150,6 @@
 
             {% include "components/footer.html" %}
 		</div>
-
 		<!-- Vendor -->		
         <script src="{{url_for('static', filename='assets/vendor/plugins/js/plugins.min.js')}}"></script>
 
