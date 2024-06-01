@@ -2,77 +2,71 @@
     <span class="custom-circle custom-circle-2 bg-color-quaternary appear-animation" data-appear-animation="zoomIn" data-appear-animation-delay="100"></span>
     <div class="container">
         <div class="row justify-content-center">
-            <h4 class="text-color-light custom-text-10 font-weight-bold text-center custom-title-with-icon-center custom-title-with-icon custom-title-with-icon-primary pb-5 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">We Can Help You With:</h4>
+            <h4 class="text-color-light custom-text-10 font-weight-bold text-center custom-title-with-icon-center custom-title-with-icon custom-title-with-icon-primary pb-5 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">Prediksi Sekarang:</h4>
         </div>
+
         <div class="row">
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="200">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none"><div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        UX Design
+            <div class="col">
+                <div class="tabs tabs-bottom tabs-center tabs-simple">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item active" role="presentation">
+                            <a class="nav-link active" href="#tabsNavigationSimpleIcons1" data-bs-toggle="tab" aria-selected="true" role="tab">
+                                <span class="featured-boxes featured-boxes-style-6 p-0 m-0">
+                                    <span class="featured-box featured-box-primary featured-box-effect-6 p-0 m-0">
+                                        <span class="box-content p-0 m-0">
+                                            <i class="icon-featured fas fa-user"></i>
+                                        </span>
+                                    </span>
+                                </span>									
+                                <p class="mb-0 pb-0">Konfigurasi Area Parkir</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="#tabsNavigationSimpleIcons2" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">
+                                <span class="featured-boxes featured-boxes-style-6 p-0 m-0">
+                                    <span class="featured-box featured-box-primary featured-box-effect-6 p-0 m-0">
+                                        <span class="box-content p-0 m-0">
+                                            <i class="icon-featured fas fa-file"></i>
+                                        </span>
+                                    </span>
+                                </span>									
+                                <p class="mb-0 pb-0">Deteksi Okupansi</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="tabsNavigationSimpleIcons1" role="tabpanel">
+                            <div class="text-center">
+                                {% with messages = get_flashed_messages() %}
+                                  {% if messages %}
+                                    <ul class="flashes">
+                                      {% for message in messages %}
+                                        <li>{{ message }}</li>
+                                      {% endfor %}
+                                    </ul>
+                                  {% endif %}
+                                {% endwith %}
+                                
+                                <div class="upload-section">
+                                    <h4>Upload Image or Video</h4>
+                                    <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+                                        <input type="file" name="file" accept="image/*,video/*" required>
+                                        <button type="submit">Upload</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="tabsNavigationSimpleIcons2" role="tabpanel">
+                            <div class="text-center">
+                                <h4>HTML5 / CSS3 / JS</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque neque eget diam posuere porta. Quisque ut nulla at nunc <a href="#">vehicula</a> lacinia. Nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In eu libero ligula. Fusce eget metus lorem, ac viverra leo. Nullam convallis, arcu vel pellentesque sodales, nisi est varius diam, ac ultrices sem ante quis sem. Proin ultricies volutpat sapien, nec scelerisque ligula mollis lobortis.</p>
+                            </div>
+                        </div>
+                        
                     </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="300">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none">
-                    <div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Web Development
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="400">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none"><div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        B2B Software
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="500">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none">
-                    <div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Content Marketing
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="600">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none"><div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Email Marketing
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="700">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none">
-                    <div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Search Engine Optimize
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="800">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none"><div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Social Media Ads
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="900">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none">
-                    <div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Brand and Identity
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="1000">
-                <a href="demo-digital-agency-2-dark-our-services-detail.html" class="text-decoration-none"><div class="service-card mb-4 bg-color-dark bg-color-hover-primary w-100 font-weight-semibold custom-text-6 line-height-6 text-color-light p-relative">
-                        Content Strategy
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-xl-9">
-                <p class="custom-text-4 mt-4 mb-0 text-center appear-animation" data-appear-animation="fadeInRightShorter" data-appear-animation-delay="400">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at massa quam. Maecenas et sem accumsan, dictum arcu eu, consectetur eros. Nulla tortor est, lobortis vestibulum turpis sed, mollis commodo orci.
-                </p>
+                </div>
             </div>
         </div>
     </div>

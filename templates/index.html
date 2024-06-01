@@ -62,8 +62,8 @@
 							<div class="header-column header-column-logo">
 								<div class="header-row">
 									<div class="header-logo">
-										<a href="demo-digital-agency-2-dark.html">
-											<img alt="Parkipi" width="139" height="59" src="{{url_for('static', filename='assets/img/demos/digital-agency-2/logos/logo-1.png')}}">
+										<a href="#" class="custom-text-10 font-weight-bold text-light">
+											SpaceMonitor
 										</a>
 									</div>
 								</div>
@@ -82,6 +82,11 @@
 													<li class="dropdown-primary">
 														<a class="nav-link text-capitalize font-weight-semibold custom-text-3" data-hash data-hash-offset="0" data-hash-offset-lg="150" href="#tentang-kami" >
 															Tentang Proyek
+														</a>
+													</li>
+													<li class="dropdown-primary">
+														<a class="nav-link text-capitalize font-weight-semibold custom-text-3" data-hash data-hash-offset="0" data-hash-offset-lg="150" href="#panduan-penggunaan" >
+															Panduan Penggunaan
 														</a>
 													</li>
 													<li class="dropdown-primary">
@@ -123,12 +128,14 @@
                 {% include "components/about.html" %}
 
 				{% include "components/demo.html" %}
-
+		
+				<!-- services -->
+				{% include "components/services.html" %}
+				
                 <!-- team -->         
                 {% include "components/team.html" %}
 
-                <!-- services -->
-                {% include "components/services.html" %}
+         
 			</div>
 
             {% include "components/footer.html" %}
