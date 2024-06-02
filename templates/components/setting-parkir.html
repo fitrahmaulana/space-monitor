@@ -9,8 +9,9 @@
             <button id="zoom-out" class="btn btn-secondary w-100">Zoom Out</button>
         </div>
         <div class="col-md-8">
-            <canvas id="canvas"></canvas>
-            <div id="bounding-box"></div>
+            <div id="canvas-container" style="overflow: auto; max-width: 100%; max-height: 500px; position: relative;">
+                <canvas id="canvas" class="border border-white d-block"></canvas>
+            </div>
         </div>
     </div>
 </div>

@@ -51,7 +51,7 @@
                                     <form id="upload-form" enctype="multipart/form-data">
                                         <h4>Upload Image or Video</h4>
                                         <div class="form-group">
-                                            <input type="file" class="form-control form-control-sm text-light" id="file" name="file" required>
+                                            <input type="file" class="form-control form-control-sm text-light" id="file" name="file" accept="image/*, video/*" required>
                                         </div>
                                         <button type="submit" class="btn btn-primary col-12">Upload</button>
                                     </form>
@@ -78,7 +78,7 @@
                                     
                                     <!-- Video stream display -->
                                     <div id="video-result" style="display:none;">
-                                        <img id="video-frame" class="img-fluid rounded"></img>
+                                        <img id="video-frame" class="img-fluid rounded">
                                     </div>
                                 </div>
                             </div>
@@ -145,8 +145,11 @@
         }
     
         function displayImages(imagePath, predictionPath) {
-            document.getElementById('original-image').src = `/static/${imagePath}`;
-            document.getElementById('processed-image').src = `/static/${predictionPath}`;
+            document.getElementById('original-image').src = `/static/${imagePath}?${Date.now()}`;
+            document.getElementById('processed-image').src = `/static/${predictionPath}?${Date.now()}`;
+
+            // hapus src video agar tidak mengkonsumsi vga
+            document.getElementById('video-frame').src = ``;
             document.getElementById('image-result').style.display = 'block';
             document.getElementById('video-result').style.display = 'none';
         }
@@ -156,9 +159,21 @@
             document.getElementById('video-result').style.display = 'block';
             document.getElementById('image-result').style.display = 'none';
         }
-        
 
-        // script konfigurasi area parkir
+        function showLoadingIndicator() {
+        loadingIndicator.style.display = 'block';
+        messages.innerHTML = '';
+        }
+    
+        function hideLoadingIndicator() {
+        loadingIndicator.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvasContainer = document.getElementById('canvas-container');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const boundingBoxes = [];
@@ -182,15 +197,6 @@
         document.getElementById('zoom-in').addEventListener('click', zoomIn);
         document.getElementById('zoom-out').addEventListener('click', zoomOut);
     
-        function showLoadingIndicator() {
-            loadingIndicator.style.display = 'block';
-            messages.innerHTML = '';
-        }
-    
-        function hideLoadingIndicator() {
-            loadingIndicator.style.display = 'none';
-        }
-    
         function handleImageUpload(event) {
             const file = event.target.files[0];
             const reader = new FileReader();
@@ -200,7 +206,7 @@
                 img.onload = () => {
                     imgWidth = img.width;
                     imgHeight = img.height;
-                    const maxWidth = canvas.parentElement.clientWidth;
+                    const maxWidth = canvasContainer.clientWidth;
                     const scaleFactor = maxWidth / imgWidth;
     
                     canvas.width = maxWidth;
@@ -324,7 +330,7 @@
     
         function saveBoundingBoxes() {
             const rescaledBoundingBoxes = rescaleBoundingBoxes();
-
+    
             fetch('/save_boxes', {
                 method: 'POST',
                 headers: {
@@ -341,7 +347,7 @@
                 }
             });
         }
-
+    
         function downloadBoundingBoxes() {
             const rescaledBoundingBoxes = rescaleBoundingBoxes();
             const blob = new Blob([JSON.stringify(rescaledBoundingBoxes, null, 2)], { type: 'application/json' });
@@ -357,8 +363,8 @@
         }
     
         function rescaleBoundingBoxes() {
-            const widthScalingFactor = imgWidth / canvas.width;
-            const heightScalingFactor = imgHeight / canvas.height;
+            const widthScalingFactor = imgWidth / (canvas.width / zoomLevel);
+            const heightScalingFactor = imgHeight / (canvas.height / zoomLevel);
     
             return boundingBoxes.map(box => ({
                 points: box.map(([x, y]) => [
@@ -367,7 +373,7 @@
                 ])
             }));
         }
-        
+    
         function zoomIn() {
             zoomLevel += zoomStep;
             redrawCanvas();
@@ -382,7 +388,13 @@
     
         function redrawCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width * zoomLevel, canvas.height * zoomLevel);
+            const scaledWidth = imgWidth * zoomLevel;
+            const scaledHeight = imgHeight * zoomLevel;
+            canvas.width = scaledWidth;
+            canvas.height = scaledHeight;
+            canvasContainer.style.width = `${scaledWidth}px`;
+            canvasContainer.style.height = `${scaledHeight}px`;
+            ctx.drawImage(img, 0, 0, scaledWidth, scaledHeight);
             boundingBoxes.forEach(drawBoundingBox);
         }
     
@@ -393,6 +405,5 @@
                 y: (event.clientY - rect.top) / zoomLevel
             };
         }
-    });    
+    });
 </script>
-

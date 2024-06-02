@@ -42,24 +42,6 @@
 
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="{{url_for('static', filename='assets/css/custom.css')}}">
-		
-		<!-- style  -->
-		<style>
-			#canvas-container {
-				position: relative;
-				width: 80%;
-				margin: auto;
-			}
-			canvas {
-				border: 1px solid black;
-			}
-			
-			#bounding-box {
-				border: 2px solid blue;
-				position: absolute;
-				pointer-events: none;
-			}
-		</style>
 		{% endblock %}
 	</head>	
 	<body class="dark" data-plugin-scroll-spy data-plugin-options="{'target': '#header'}">
@@ -137,7 +119,7 @@
                 <!-- About -->
                 {% include "components/about.html" %}
 
-				{% include "components/demo.html" %}
+				{% include "components/panduan.html" %}
 		
 				<!-- services -->
 				{% include "components/services.html" %}
