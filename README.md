@@ -22,5 +22,5 @@ Install my-project with npm
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://raw.githubusercontent.com/insomness/space-monitor/main/ss%20web.png)
 
