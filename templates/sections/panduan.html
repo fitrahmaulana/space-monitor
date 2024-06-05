@@ -1,0 +1,134 @@
+<section class="py-5 mb-5 mt-0 p-relative z-index-1" id="panduan-penggunaan">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6">
+                <h4 class="custom-text-10 mb-4 pb-2 font-weight-bold custom-title-with-icon custom-title-with-icon-primary appear-animation"
+                    data-appear-animation="fadeInRightShorter" data-appear-animation-delay="100">Cara Penggunaan</h4>
+
+                <div class="accordion custom-accordion mb-4 appear-animation animated fadeIn appear-animation-visible"
+                    data-appear-animation="fadeIn" data-appear-animation-delay="700" style="animation-delay: 700ms;"
+                    id="accordion12">
+
+                    <!-- catatan penting -->
+                    <div class="card card-default custom-card-default rounded-0">
+                        <div class="card-header m-0 bg-color-tertiary" id="collapse12HeadingIntro">
+                            <h4 class="card-title m-0 custom-text-8">
+                                <a class="accordion-toggle px-0 py-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse12Intro" aria-expanded="true" aria-controls="collapse12Intro">
+                                    <i class="fas fa-exclamation-circle"></i> Catatan Penting
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse12Intro" class="custom-card-body-collapse collapse show"
+                            aria-labelledby="collapse12HeadingIntro" data-bs-parent="#accordion12">
+                            <div class="card-body text-color-light">
+                                <ul class="">
+                                    <li><strong>Pastikan:</strong> resolusi gambar dan video sama untuk hasil deteksi yang akurat.</li>
+                                    <li><strong>Gunakan:</strong> VLC Media Player untuk kemudahan mengambil frame dari video.</li>
+                                    <li><strong>Mengambil gambar/frame dari video:</strong>
+                                        <ul>
+                                            <li>Buka video dengan perangkat lunak pemutar video yang mendukung fitur tangkapan layar (seperti VLC Media Player).</li>
+                                            <li>Putar video sampai pada frame yang diinginkan.</li>
+                                            <li>Gunakan fitur tangkapan layar pada pemutar video (biasanya tersedia di menu "Video" atau dengan tombol pintasan seperti Shift + S di VLC) untuk mengambil gambar dari frame tersebut.</li>
+                                            <li>Simpan gambar yang diambil ke perangkat Anda.</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Pastikan:</strong> bounding box dan video/gambar yang diunggah saling berkaitan dan sesuai satu sama lain untuk memastikan hasil yang akurat.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- konfigurasi area parkir -->
+                    <div class="card card-default custom-card-default rounded-0">
+                        <div class="card-header m-0 bg-color-tertiary" id="collapse12HeadingOne">
+                            <h4 class="card-title m-0 custom-text-8">
+                                <a class="accordion-toggle px-0 py-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse12One" aria-expanded="false" aria-controls="collapse12One">
+                                    <i class="fas fa-map-marker-alt"></i> Konfigurasi Area Parkir
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse12One" class="custom-card-body-collapse collapse"
+                            aria-labelledby="collapse12HeadingOne" data-bs-parent="#accordion12">
+                            <div class="card-body text-color-light">
+                                <p>Bagian ini digunakan untuk menentukan area parkir dengan menggunakan titik-titik pilihan dan mendapatkan hasil dalam format JSON.</p>
+                                <ol class="">
+                                    <li>
+                                        <strong>Unggah Gambar Tempat Parkir:</strong>
+                                        <ul>
+                                            <li>Klik tombol "Unggah Gambar" pada bagian Konfigurasi Area Parkir.</li>
+                                            <li>Pilih gambar tempat parkir dari perangkat Anda.</li>
+                                            <li>Gambar akan ditampilkan di halaman.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Menentukan Area Parkir:</strong>
+                                        <ul>
+                                            <li>Klik tombol "Tambahkan Area Parkir".</li>
+                                            <li>Pilih titik-titik pada gambar untuk menggambar poligon yang menandai area parkir.</li>
+                                            <li>Ulangi langkah ini untuk setiap area parkir yang ingin ditandai.</li>
+                                            <li>Setelah selesai, klik tombol "Simpan". Konfigurasi akan disimpan secara otomatis dalam format JSON.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deteksi Area Parkir -->
+                    <div class="card card-default custom-card-default rounded-0">
+                        <div class="card-header m-0 bg-color-tertiary" id="collapse12HeadingTwo">
+                            <h4 class="card-title m-0 custom-text-8">
+                                <a class="accordion-toggle px-0 py-3" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse12Two" aria-expanded="false" aria-controls="collapse12Two">
+                                    <i class="fas fa-car"></i> Deteksi Area Parkir
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse12Two" class="custom-card-body-collapse collapse"
+                            aria-labelledby="collapse12HeadingTwo" data-bs-parent="#accordion12">
+                            <div class="card-body text-color-light">
+                                <p>Bagian ini digunakan untuk mendeteksi okupansi tempat parkir dari gambar/video yang diunggah dan data bounding box yang telah dikonfigurasi.</p>
+                                <ol>
+                                    <li>
+                                        <strong>Unggah Gambar:</strong>
+                                        <ul>
+                                            <li>Klik tombol "Choose File" atau "Browse".</li>
+                                            <li>Pilih gambar yang ingin Anda unggah dari perangkat Anda. Pastikan gambar yang dipilih memiliki format yang didukung (misalnya, JPG, PNG).</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Isi Confidence Threshold:</strong>
+                                        <ul>
+                                            <li>Masukkan nilai antara 0 hingga 1 di kolom ini.</li>
+                                            <li>Nilai ini menentukan tingkat kepercayaan minimum yang diperlukan untuk menampilkan hasil deteksi. Contoh: Jika Anda memasukkan 0.8, maka hanya hasil dengan tingkat kepercayaan 80% atau lebih yang akan ditampilkan.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Show Labels:</strong>
+                                        <ul>
+                                            <li>Centang kotak ini jika Anda ingin label ditampilkan pada hasil deteksi di gambar.</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <strong>Unggah Bounding Box (Opsional):</strong>
+                                        <ul>
+                                            <li>Klik "Choose File", pilih <em>bounding_boxes.json</em> jika Anda memiliki file tersebut, atau biarkan kosong jika tidak ada.</li>
+                                            <li>File ini biasanya dalam format JSON dan berisi koordinat area parkir didalam gambar.</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-6 pt-5 mt-5 d-none d-xl-block">
+                <img src="{{url_for('static', filename='assets/img/using/services/contoh prediksi.png')}}" class="img-fluid appear-animation animated fadeIn appear-animation-visible" data-appear-animation="fadeIn" data-appear-animation-delay="700" alt="Contoh Prediksi" style="animation-delay: 700ms;">
+            </div>
+        </div>
+    </div>
+</section>

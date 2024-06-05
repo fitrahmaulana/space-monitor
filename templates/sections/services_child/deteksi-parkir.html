@@ -1,0 +1,131 @@
+<div class="row">
+    <div class="col-md-4">
+        <div id="messages"></div>
+        <!-- File upload form -->
+        <form id="upload-form" enctype="multipart/form-data">
+            <h4>Upload Image or Video</h4>
+            <div class="form-group">
+                <input type="file" class="form-control text-light" id="file" name="file" accept="image/*, video/*" required>
+            </div>
+            <div class="form-group">
+                <label for="conf_threshold">Confidence Threshold: <span id="conf_value">0.5</span></label>
+                <span class="fa-solid fa-circle-question mt-4" data-bs-toggle='tooltip' data-bs-original-title="the higher the more accurate but the more difficult to detect"></span>
+                <input type="range" class="form-control form-control-range" id="conf_threshold" name="conf_threshold" min="0" max="1" step="0.01" required value="0.5" oninput="document.getElementById('conf_value').textContent = this.value;">
+            </div>
+            <div class="form-group">
+                <label for="show_labels">Show Labels</label>
+                <input type="checkbox" class="form-check-input" id="show_labels" name="show_labels">
+            </div>
+            <div class="form-group">
+                <label for="bounding_box">Bounding Box File (optional)</label>
+                <input type="file" class="form-control text-light" id="bounding_box" name="bounding_box" accept="application/json">
+            </div>
+            <button type="submit" class="btn btn-primary col-12">Upload</button>
+        </form>
+    </div>
+    
+    <div class="col-md-8">
+        <div id="loading" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <!-- Image prediction display -->
+        <div id="image-result" style="display:none;">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Original Image</h5>
+                    <img id="original-image" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h5>Processed Image</h5>
+                    <img id="processed-image" class="img-fluid">
+                </div>
+            </div>
+        </div>                            
+        
+        <!-- Video stream display -->
+        <div id="video-result" style="display:none;">
+            <img id="video-frame" class="img-fluid rounded">
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const uploadForm = document.getElementById('upload-form');
+        const loadingIndicator = document.getElementById('loading');
+        const messages = document.getElementById('messages');
+
+        uploadForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+        
+            const formData = new FormData(uploadForm);
+        
+            // Show the loading indicator
+            showLoadingIndicator();
+        
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                });
+        
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.error || 'Unknown error');
+                }
+
+                const result = await response.json();
+                displayMessage(result.message, 'info');
+        
+                if (result.image_path && result.prediction_path) {
+                    displayImages(result.image_path, result.prediction_path);
+                } else if (result.video_path) {
+                    displayVideo(result.video_path, result.conf_threshold, result.show_labels);
+                }
+            } catch (error) {
+                displayMessage(error.message, 'danger');
+            } finally {
+                hideLoadingIndicator();
+            }
+        });
+
+        function displayMessage(message, type) {
+            messages.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    ${message}
+                </div>
+            `;
+        }
+    
+        function displayImages(imagePath, predictionPath) {
+            document.getElementById('original-image').src = `/static/${imagePath}?${Date.now()}`;
+            document.getElementById('processed-image').src = `/static/${predictionPath}?${Date.now()}`;
+
+            // Clear the video frame to avoid consuming GPU resources
+            document.getElementById('video-frame').src = ``;
+            document.getElementById('image-result').style.display = 'block';
+            document.getElementById('video-result').style.display = 'none';
+        }
+    
+        function displayVideo(videoPath, conf_threshold, show_labels) {
+            document.getElementById('video-frame').src = `/video_feed?video_path=${encodeURIComponent(videoPath)}&conf_threshold=${conf_threshold}&show_labels=${show_labels}&${Date.now()}`;
+            document.getElementById('video-result').style.display = 'block';
+            document.getElementById('image-result').style.display = 'none';
+        }
+
+        function showLoadingIndicator() {
+            loadingIndicator.style.display = 'block';
+            messages.innerHTML = '';
+        }
+    
+        function hideLoadingIndicator() {
+            loadingIndicator.style.display = 'none';
+        }
+    });
+</script>

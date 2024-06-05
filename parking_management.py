@@ -195,7 +195,7 @@ class ParkingManagement:
         with open(json_file, "r") as json_file:
             return json.load(json_file)
 
-    def process_data(self, json_data, im0, boxes, clss):
+    def process_data(self, json_data, im0, boxes, clss, conf, show_labels):
         """
         Process the model data for parking lot management.
 
@@ -217,14 +217,15 @@ class ParkingManagement:
             points_array = np.array(points, dtype=np.int32).reshape((-1, 1, 2))
             region_occupied = False
 
-            for box, cls in zip(boxes, clss):
+            for box, cls, c in zip(boxes, clss, conf):
                 x_center = int((box[0] + box[2]) / 2)
                 y_center = int((box[1] + box[3]) / 2)
-                text = f"{self.model.names[int(cls)]}"
+                text = f"{self.model.names[int(cls)]} {c:.2f}"
 
-                annotator.display_objects_labels(
-                    im0, text, self.txt_color, self.bg_color, x_center, y_center, self.margin
-                )
+                if show_labels:
+                    annotator.display_objects_labels(
+                        im0, text, self.txt_color, self.bg_color, x_center, y_center, self.margin
+                    )
 
                 dist = cv2.pointPolygonTest(points_array, (x_center, y_center), False)
                 if dist >= 0:

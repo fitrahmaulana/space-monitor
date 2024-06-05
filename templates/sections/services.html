@@ -1,0 +1,56 @@
+<section class="our-services p-relative py-5 my-5" id="prediksi">
+    <span class="custom-circle custom-circle-2 bg-color-quaternary appear-animation" data-appear-animation="zoomIn"
+        data-appear-animation-delay="100"></span>
+    <div class="container">
+        <div class="row justify-content-center">
+            <h4 class="text-color-light custom-text-10 font-weight-bold text-center custom-title-with-icon-center custom-title-with-icon custom-title-with-icon-primary pb-4 mb-4 appear-animation"
+                data-appear-animation="fadeInUpShorter" data-appear-animation-delay="200">Prediksi Sekarang:</h4>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="tabs tabs-bottom tabs-center tabs-simple">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item active" role="presentation">
+                            <a class="nav-link active" href="#tabsNavigationSimpleIcons1" data-bs-toggle="tab"
+                                aria-selected="true" role="tab">
+                                <span class="featured-boxes featured-boxes-style-6 p-0 m-0">
+                                    <span class="featured-box featured-box-primary featured-box-effect-6 p-0 m-0">
+                                        <span class="box-content p-0 m-0">
+                                            <i class="icon-featured fas fa-map-marker-alt"></i>
+                                        </span>
+                                    </span>
+                                </span>
+                                <p class="mb-0 pb-0">Konfigurasi Area Parkir</p>
+                            </a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" href="#tabsNavigationSimpleIcons2" data-bs-toggle="tab"
+                                aria-selected="false" role="tab" tabindex="-1">
+                                <span class="featured-boxes featured-boxes-style-6 p-0 m-0">
+                                    <span class="featured-box featured-box-primary featured-box-effect-6 p-0 m-0">
+                                        <span class="box-content p-0 m-0">
+                                            <i class="icon-featured fas fa-car"></i>
+                                        </span>
+                                    </span>
+                                </span>
+                                <p class="mb-0 pb-0">Deteksi Area Parkir</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active show" id="tabsNavigationSimpleIcons1" role="tabpanel">
+                            {% include 'sections/services_child/setting-parkir.html' %}
+                        </div>
+
+                        <div class="tab-pane" id="tabsNavigationSimpleIcons2" role="tabpanel">
+                            {% include 'sections/services_child/deteksi-parkir.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
