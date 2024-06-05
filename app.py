@@ -9,7 +9,7 @@ import logging
 # Konfigurasi aplikasi
 class Config:
     UPLOAD_FOLDER = os.path.join('static', 'uploads')  # Direktori untuk menyimpan file yang diunggah
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov', 'json'}  # Ekstensi file yang diperbolehkan
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'mp4', 'avi', 'mov', 'json'}  # Ekstensi file yang diperbolehkan
     MODEL_PATH = "./best.pt"  # Jalur ke model yang digunakan untuk prediksi
     POLYGON_JSON_PATH = "bounding_boxes.json"  # Jalur ke file JSON yang berisi bounding boxes
     SECRET_KEY = 'supersecretkey'  # Kunci rahasia untuk aplikasi Flask
