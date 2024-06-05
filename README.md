@@ -6,8 +6,6 @@ Parking Lot Occupancy Detection With YOLOv8
 
 ## Installation
 
-Install my-project with npm
-
 ```bash
   pip install -r requirements.txt
   python app.py
