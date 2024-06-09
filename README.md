@@ -20,5 +20,5 @@ Parking Lot Occupancy Detection With YOLOv8
 
 ## Screenshots
 
-![App Screenshot](https://raw.githubusercontent.com/insomness/space-monitor/main/ss%20web.png)
+![App Screenshot](https://raw.githubusercontent.com/fitrahmaulana/space-monitor/main/ss%20web.png)
 
